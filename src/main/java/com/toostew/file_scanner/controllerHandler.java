@@ -12,6 +12,13 @@ import software.amazon.awssdk.services.s3.S3Client;
 import tools.jackson.databind.json.JsonMapper;
 
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 public class controllerHandler {
@@ -30,8 +37,8 @@ public class controllerHandler {
 
 
 
-    @GetMapping("/test")
-    public void test(@RequestBody FileToScanRequest fileToScanRequest) {
+    @GetMapping("/scan")
+    public void scan(@RequestBody FileToScanRequest fileToScanRequest) {
         BufferedInputStream tempStream = r2Service.getObjectFromR2AsBufferedInputStream(fileToScanRequest.getStored_name());
 
         byte[] reply;
@@ -40,13 +47,18 @@ public class controllerHandler {
         } catch (Exception e) {
             throw new ControllerHandlerException("Could not scan the input", e);
         }
+        String str = new String(reply, StandardCharsets.UTF_8);
         if (ClamAVClient.isCleanReply(reply)) {
             System.out.println("Scan successful!");
+            System.out.println(str);
         } else {
-            System.out.println("Scan failed!");
+            System.out.println("virus detected!");
+            System.out.println(str);
         }
 
     }
+
+
 
 
 }
