@@ -1,6 +1,6 @@
 package com.toostew.file_scanner.pojo;
 
-public class FileToScanRequest {
+public class ProcessRequest {
 
     private int file_records_id;
 

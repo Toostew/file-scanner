@@ -1,24 +1,17 @@
-package com.toostew.file_scanner;
+package com.toostew.file_scanner.controller;
 
 
 import com.toostew.file_scanner.exceptions.ControllerHandlerException;
-import com.toostew.file_scanner.pojo.FileToScanRequest;
+import com.toostew.file_scanner.pojo.ProcessRequest;
 import com.toostew.file_scanner.service.R2Service;
 import fi.solita.clamav.ClamAVClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import software.amazon.awssdk.services.s3.S3Client;
 import tools.jackson.databind.json.JsonMapper;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @RestController
 public class controllerHandler {
@@ -38,8 +31,8 @@ public class controllerHandler {
 
 
     @GetMapping("/scan")
-    public void scan(@RequestBody FileToScanRequest fileToScanRequest) {
-        BufferedInputStream tempStream = r2Service.getObjectFromR2AsBufferedInputStream(fileToScanRequest.getStored_name());
+    public void scan(@RequestBody ProcessRequest processRequest) {
+        BufferedInputStream tempStream = r2Service.getObjectFromR2AsBufferedInputStream(processRequest.getStored_name());
 
         byte[] reply;
         try {
