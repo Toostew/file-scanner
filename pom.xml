@@ -41,10 +41,9 @@
             <artifactId>spring-boot-starter-webmvc</artifactId>
         </dependency>
 
-    <!-- SPRING DATA/MYSQL, disable for testing
 
 
-
+    <!--mySQL dependencies-->
 
         <dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -63,8 +62,6 @@
 
 
 
-
-        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc-test</artifactId>

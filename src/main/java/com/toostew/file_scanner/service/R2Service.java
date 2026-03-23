@@ -70,6 +70,11 @@ public class R2Service {
         }
     }
 
+    //move object to a different R2 bucket
+    public void moveObjectToDifferentBucket(String originBucket, String key, String destinationBucket) {
+
+    }
+
 
 
 }

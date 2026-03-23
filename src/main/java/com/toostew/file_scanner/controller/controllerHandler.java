@@ -13,6 +13,8 @@ import tools.jackson.databind.json.JsonMapper;
 import java.io.BufferedInputStream;
 import java.nio.charset.StandardCharsets;
 
+
+//TODO: DEPRECATED, to remove or disable
 @RestController
 public class controllerHandler {
 

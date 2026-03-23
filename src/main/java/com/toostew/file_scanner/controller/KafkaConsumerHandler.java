@@ -39,12 +39,23 @@ public class KafkaConsumerHandler {
             throw new ControllerHandlerException("Could not scan the input", e);
         }
         String str = new String(reply, StandardCharsets.UTF_8);
+
         if (ClamAVClient.isCleanReply(reply)) {
-            System.out.println("Scan successful!");
-            System.out.println(str);
+            //clean, no issues
+            System.out.println("Scan complete for " +  processRequest.getStored_name() + ", no issues");
+
+            //make file viewable, change unverified to verified
+
+
+
+
         } else {
-            System.out.println("virus detected!");
-            System.out.println(str);
+            //threat detected
+            System.out.println("Scan for " +  processRequest.getStored_name() + " detected: " + str);
+
+
+            //file (should) remain unviewable, but to be sure just set it unviewable anyway
+            //change unverified to flagged, move to quarantine bucket
         }
     }
 
