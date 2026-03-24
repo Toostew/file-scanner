@@ -7,6 +7,7 @@ import com.toostew.file_scanner.exceptions.DAO.DAOException;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -17,7 +18,7 @@ public class Flagged_filesDAO implements GenericDAO<Flagged_files> {
     public Flagged_filesDAO(EntityManager em) {
         this.em = em;
     }
-
+    @Transactional
     @Override
     public void create(Flagged_files flaggedFiles) {
         try {
@@ -43,7 +44,7 @@ public class Flagged_filesDAO implements GenericDAO<Flagged_files> {
             throw new DAOException("Flagged_filesDAO: unknown issue", e);
         }
     }
-
+    @Transactional
     @Override
     public void update(Flagged_files flaggedFiles) {
         try {
@@ -60,7 +61,7 @@ public class Flagged_filesDAO implements GenericDAO<Flagged_files> {
             throw new DAOException("Flagged_filesDAO: unknown issue", e);
         }
     }
-
+    @Transactional
     @Override
     public void delete(int id) {
         try {

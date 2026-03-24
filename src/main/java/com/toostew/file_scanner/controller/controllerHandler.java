@@ -1,7 +1,7 @@
 package com.toostew.file_scanner.controller;
 
 
-import com.toostew.file_scanner.exceptions.ControllerHandlerException;
+import com.toostew.file_scanner.exceptions.ControllerException;
 import com.toostew.file_scanner.pojo.ProcessRequest;
 import com.toostew.file_scanner.service.R2Service;
 import fi.solita.clamav.ClamAVClient;
@@ -40,7 +40,7 @@ public class controllerHandler {
         try {
             reply = clamAVClient.scan(tempStream);
         } catch (Exception e) {
-            throw new ControllerHandlerException("Could not scan the input", e);
+            throw new ControllerException("Could not scan the input", e);
         }
         String str = new String(reply, StandardCharsets.UTF_8);
         if (ClamAVClient.isCleanReply(reply)) {
